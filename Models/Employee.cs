@@ -7,7 +7,7 @@ namespace EmployeeApi.Models
     {
         public int Id { get; set; }
 
-        // Имя, фамилия, должность, дата рождения, контактные данные
+        // Ім'я, прізвище, посада, дата народження, контактні дані
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Position { get; set; }
@@ -15,7 +15,7 @@ namespace EmployeeApi.Models
         public string Email { get; set; }
         public string Phone { get; set; }
 
-        // Связь к User (для аутентификации)
+        // Зв'язок до User (для аутентифікації)
         public User? User { get; set; }
     }
 }

@@ -8,13 +8,13 @@ namespace EmployeeApi.Models
         public int Id { get; set; }
 
         [Required]
-        public string Username { get; set; } // например, логин по email или произвольный
+        public string Username { get; set; } // наприклад, логін по email або довільний
 
         [Required]
-        public string PasswordHash { get; set; } // хеш пароля
+        public string PasswordHash { get; set; } // Хеш пароля
 
         [Required]
-        public string Role { get; set; } // "Administrator" или "Employee"
+        public string Role { get; set; } // "Administrator" або "Employee"
 
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }

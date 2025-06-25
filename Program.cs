@@ -26,14 +26,14 @@ builder.Host.UseSerilog();
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 if (string.IsNullOrEmpty(connectionString))
 {
-    Log.Fatal("CONNECTION_STRING не задан в окружении");
+    Log.Fatal("CONNECTION_STRING is not set in the environment");
     return;
 }
 
 var redisConnection = Environment.GetEnvironmentVariable("REDIS_CONNECTION");
 if (string.IsNullOrEmpty(redisConnection))
 {
-    Log.Fatal("REDIS_CONNECTION не задан в окружении");
+    Log.Fatal("REDIS_CONNECTION is not set in the environment");
     return;
 }
 
@@ -145,7 +145,7 @@ using (var scope = app.Services.CreateScope())
         db.Users.Add(adminUser);
         db.SaveChanges();
 
-        Log.Information("Создан admin: admin@example.com / admin123");
+        Log.Information("Created by admin: admin@example.com / admin123");
     }
 }
 

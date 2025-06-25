@@ -14,7 +14,7 @@ namespace EmployeeApi.Utils
     public class SessionManager
     {
         private readonly IDatabase _db;
-        private readonly TimeSpan _sessionExpiry = TimeSpan.FromHours(8); // 8 часов сессия
+        private readonly TimeSpan _sessionExpiry = TimeSpan.FromHours(8); // 8 годин сесія
 
         public SessionManager(IConnectionMultiplexer redis)
         {

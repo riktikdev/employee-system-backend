@@ -57,13 +57,13 @@ namespace EmployeeApi.Services
         {
             if (requesterRole != "Administrator" && requesterId != id)
             {
-                throw new UnauthorizedAccessException("Нет прав на редактирование");
+                throw new UnauthorizedAccessException("You do not have editing rights");
             }
 
             var existing = await _employeeRepo.GetByIdAsync(id);
             if (existing == null)
             {
-                throw new ArgumentException("Сотрудник не найден");
+                throw new ArgumentException("This employee was not found.");
             }
 
             existing.FirstName = request.FirstName;
@@ -81,7 +81,7 @@ namespace EmployeeApi.Services
             var existing = await _employeeRepo.GetByIdAsync(id);
             if (existing == null)
             {
-                throw new ArgumentException("Сотрудник не найден");
+                throw new ArgumentException("This employee was not found.");
             }
             await _employeeRepo.DeleteAsync(existing);
         }

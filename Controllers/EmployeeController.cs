@@ -113,7 +113,7 @@ namespace EmployeeApi.Controllers
         {
             var role = HttpContext.Items["UserRole"] as string;
             if (role != "Administrator")
-                return Forbid("Только администратор может добавлять сотрудников");
+                return Forbid("Only administrator can add employees");
 
             try
             {
@@ -142,7 +142,7 @@ namespace EmployeeApi.Controllers
         }
 
         /// <summary>
-        /// Обновить данные сотрудника (Admin или сам сотрудник)
+        /// Оновити дані співробітника (Admin або сам співробітник)
         /// </summary>
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateEmployeeRequest request)
@@ -170,26 +170,26 @@ namespace EmployeeApi.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Ошибка при обновлении сотрудника");
-                return StatusCode(500, "Внутренняя ошибка при обновлении сотрудника");
+                Log.Error(ex, "Error updating employee");
+                return StatusCode(500, "Internal error updating employee");
             }
         }
 
         /// <summary>
-        /// Удалить сотрудника (только Administrator)
+        /// Видалити співробітника (тільки Administrator)
         /// </summary>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             var role = HttpContext.Items["UserRole"] as string;
             if (role != "Administrator")
-                return Forbid("Только администратор может удалять сотрудников");
+                return Forbid("Only the administrator can delete employees");
 
             try
             {
                 await _empService.DeleteAsync(id);
 
-                // Сбрасываем кеш
+                // Скидаємо кеш
                 await _cache.RemoveAsync(ALL_EMPLOYEES_CACHE_KEY);
                 await _cache.RemoveAsync($"{EMPLOYEE_CACHE_PREFIX}{id}");
 
@@ -201,8 +201,8 @@ namespace EmployeeApi.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Ошибка при удалении сотрудника");
-                return StatusCode(500, "Внутренняя ошибка при удалении сотрудника");
+                Log.Error(ex, "Error while deleting employee");
+                return StatusCode(500, "Internal error deleting employee");
             }
         }
     }

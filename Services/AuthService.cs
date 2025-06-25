@@ -23,19 +23,19 @@ namespace EmployeeApi.Services
             var user = await _userRepo.GetByUsernameAsync(request.Username);
             if (user == null)
             {
-                throw new ArgumentException("Неверный логин или пароль");
+                throw new ArgumentException("Incorrect login or password");
             }
 
-            // Сравниваем bcrypt-хеш
+            // Порівнюємо bcrypt-хеш
             if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
             {
-                throw new ArgumentException("Неверный логин или пароль");
+                throw new ArgumentException("Incorrect login or password");
             }
 
-            // Генерируем GUID-токен (сессионный)
+            // Генеруємо GUID-токен (сесійний)
             var token = Guid.NewGuid().ToString();
 
-            // Сохраняем в Redis: ключ = token, значение = UserId + Role
+            // Зберігаємо в Redis: ключ = token, значення = UserId + Role
             await _sessionManager.CreateSessionAsync(token, user.Id, user.Role);
 
             return token;

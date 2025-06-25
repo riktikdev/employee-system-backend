@@ -19,7 +19,7 @@ namespace EmployeeApi.Controllers
         }
 
         /// <summary>
-        /// Логин: возвращает сессионный токен.
+        /// Логін: Повертає сесійний токен.
         /// </summary>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
@@ -42,18 +42,18 @@ namespace EmployeeApi.Controllers
         }
 
         /// <summary>
-        /// Логаут: удаляет сессию по токену.
+        /// Логаут: видаляє сесію з токену.
         /// </summary>
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
             if (!Request.Headers.TryGetValue("X-Session-Token", out var token))
             {
-                return BadRequest(new { Message = "Токен отсутствует в заголовке X-Session-Token" });
+                return BadRequest(new { Message = "Token is missing from X-Session-Token header" });
             }
 
             await _authService.LogoutAsync(token!);
-            return Ok(new { Message = "Вы успешно разлогинились" });
+            return Ok(new { Message = "You have successfully logged out." });
         }
     }
 }
